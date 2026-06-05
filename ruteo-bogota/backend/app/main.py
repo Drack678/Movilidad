@@ -20,7 +20,11 @@ from collections.abc import AsyncGenerator
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+<<<<<<< HEAD
 from app.api.routes import analytics, graph, health, locations, routing, traffic, transit
+=======
+from app.api.routes import analytics, graph, health, locations, routing, traffic
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 from app.api.state import app_state
 from app.core.config import get_settings
 from app.database.session import init_db
@@ -78,7 +82,10 @@ def create_app() -> FastAPI:
     app.include_router(traffic.router, prefix=api_prefix)
     app.include_router(analytics.router, prefix=api_prefix)
     app.include_router(graph.router, prefix=api_prefix)
+<<<<<<< HEAD
     app.include_router(transit.router, prefix=api_prefix)
+=======
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 
     @app.get("/", tags=["root"])
     def root() -> dict:

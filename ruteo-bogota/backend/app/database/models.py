@@ -14,6 +14,16 @@ from __future__ import annotations
 from sqlalchemy import Float, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
+<<<<<<< HEAD
+=======
+try:
+    from geoalchemy2 import Geometry  # type: ignore
+
+    _HAS_POSTGIS = True
+except ImportError:  # pragma: no cover - depende del entorno
+    _HAS_POSTGIS = False
+
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 
 class Base(DeclarativeBase):
     """Clase base declarativa de SQLAlchemy."""
@@ -35,5 +45,14 @@ class Location(Base):
     lon: Mapped[float] = mapped_column(Float, nullable=False)
     category: Mapped[str] = mapped_column(String(60), default="general", index=True)
 
+<<<<<<< HEAD
+=======
+    if _HAS_POSTGIS:
+        # Punto geográfico (lon, lat) en SRID 4326 para consultas espaciales.
+        geom: Mapped[object] = mapped_column(
+            Geometry(geometry_type="POINT", srid=4326), nullable=True
+        )
+
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
     def __repr__(self) -> str:  # pragma: no cover - utilidad de depuración
         return f"<Location id={self.id} name={self.name!r} cat={self.category!r}>"

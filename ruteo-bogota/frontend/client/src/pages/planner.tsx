@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+=======
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 import { apiRequest } from "@/lib/queryClient";
 import {
   Map as MapIcon,
@@ -36,6 +41,7 @@ const ROUTE_COLOR: Record<Algorithm, string> = {
 
 type Picking = "origin" | "dest";
 
+<<<<<<< HEAD
 // Types for TM network
 interface TMStation {
   id: string;
@@ -57,6 +63,8 @@ interface TMNetwork {
   lines: TMLine[];
 }
 
+=======
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 export default function PlannerPage() {
   const { toast } = useToast();
   const [origin, setOrigin] = useState<LatLon | null>(null);
@@ -65,6 +73,7 @@ export default function PlannerPage() {
   const [mode, setMode] = useState<TransportMode>("car");
   const [algorithm, setAlgorithm] = useState<Algorithm>("aco");
   const [route, setRoute] = useState<RouteResponse | null>(null);
+<<<<<<< HEAD
   const [tmRecommendation, setTmRecommendation] = useState<any>(null);
 
   // Fetch TM network
@@ -113,6 +122,30 @@ export default function PlannerPage() {
                   variant: "default",
               });
           }
+=======
+
+  const routeMutation = useMutation({
+    mutationFn: async (): Promise<RouteResponse> => {
+      const body: RouteRequest = {
+        origin_lat: origin![0],
+        origin_lon: origin![1],
+        dest_lat: dest![0],
+        dest_lon: dest![1],
+        mode,
+        algorithm,
+      };
+      const res = await apiRequest("POST", "/api/route", body);
+      return res.json();
+    },
+    onSuccess: (data: RouteResponse) => {
+        setRoute(data);
+        if (!data.found) {
+            toast({
+                title: "Sin ruta",
+                description: "No se encontró una ruta entre los puntos seleccionados, pero intentamos usar la mejor opción disponible.",
+                variant: "default",
+            });
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
         }
     },
     onError: (err: Error) => {
@@ -138,6 +171,7 @@ export default function PlannerPage() {
     setPicking("origin");
   }
 
+<<<<<<< HEAD
   // Prepare routes for map
   let routes: RouteLine[] = [];
   let fitTo: LatLon[] | null = null;
@@ -172,6 +206,14 @@ export default function PlannerPage() {
     fitTo = route.coordinates;
   }
 
+=======
+  const routes: RouteLine[] =
+    route?.found && route.coordinates.length
+      ? [{ coordinates: route.coordinates, color: ROUTE_COLOR[algorithm], weight: 6 }]
+      : [];
+
+  const fitTo = route?.found && route.coordinates.length ? route.coordinates : null;
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
   const canCalc = origin && dest;
 
   return (
@@ -263,6 +305,7 @@ export default function PlannerPage() {
             )}
           </button>
 
+<<<<<<< HEAD
           {mode === "transmilenio" && tmRecommendation ? (
             <div className="space-y-3">
               {tmRecommendation.origin_station && (
@@ -294,6 +337,9 @@ export default function PlannerPage() {
               )}
             </div>
           ) : route?.found ? (
+=======
+          {route?.found && (
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
             <div className="grid grid-cols-2 gap-3" data-testid="route-results">
               <StatCard
                 label="Distancia"
@@ -318,7 +364,11 @@ export default function PlannerPage() {
                 testId="stat-runtime"
               />
             </div>
+<<<<<<< HEAD
           ) : null}
+=======
+          )}
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
         </div>
 
         {/* Mapa */}

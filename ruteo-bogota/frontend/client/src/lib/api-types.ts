@@ -3,7 +3,11 @@
  * Mantienen el frontend fuertemente tipado y alineado con el contrato de la API.
  */
 
+<<<<<<< HEAD
 export type TransportMode = "car" | "bike" | "foot" | "transmilenio";
+=======
+export type TransportMode = "car" | "bike" | "foot";
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 export type Algorithm = "aco" | "dijkstra" | "astar" | "bellman_ford";
 
 export interface AcoParams {
@@ -143,7 +147,10 @@ export const MODE_LABELS: Record<TransportMode, string> = {
   car: "Automóvil",
   bike: "Bicicleta",
   foot: "Peatón",
+<<<<<<< HEAD
   transmilenio: "TransMilenio",
+=======
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 };
 
 export const ALGO_LABELS: Record<Algorithm, string> = {

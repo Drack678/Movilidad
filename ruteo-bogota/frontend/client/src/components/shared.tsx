@@ -1,5 +1,9 @@
 import { type ReactNode } from "react";
+<<<<<<< HEAD
 import { Car, Bike, Footprints, Bus } from "lucide-react";
+=======
+import { Car, Bike, Footprints } from "lucide-react";
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 import type { TransportMode, Algorithm } from "@/lib/api-types";
 
 export function PageHeader({
@@ -61,7 +65,10 @@ const MODE_META: Record<TransportMode, { label: string; icon: typeof Car }> = {
   car: { label: "Auto", icon: Car },
   bike: { label: "Bici", icon: Bike },
   foot: { label: "A pie", icon: Footprints },
+<<<<<<< HEAD
   transmilenio: { label: "TM", icon: Bus },
+=======
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
 };
 
 export function ModeSelector({
@@ -72,7 +79,11 @@ export function ModeSelector({
   onChange: (m: TransportMode) => void;
 }) {
   return (
+<<<<<<< HEAD
     <div className="grid grid-cols-4 gap-1.5 rounded-lg border border-border bg-muted/40 p-1">
+=======
+    <div className="grid grid-cols-3 gap-1.5 rounded-lg border border-border bg-muted/40 p-1">
+>>>>>>> 0bee57f2e1b8fe42a131df70f129a08fbe5945fa
       {(Object.keys(MODE_META) as TransportMode[]).map((m) => {
         const { label, icon: Icon } = MODE_META[m];
         const active = value === m;
