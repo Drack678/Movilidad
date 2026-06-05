@@ -1,0 +1,34 @@
+# ---------------------------------------------------------------------------
+# Dependencias del backend "Ruteo Bogotá"
+# ---------------------------------------------------------------------------
+# API / servidor
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-multipart==0.0.20
+
+# Datos geoespaciales / grafo vial
+osmnx==2.0.1
+networkx==3.4.2
+geopandas==1.0.1
+shapely==2.0.6
+
+# Cómputo numérico / tablas
+numpy==2.2.1
+pandas==2.2.3
+scipy==1.15.0
+
+# Base de datos (PostgreSQL + PostGIS)
+sqlalchemy==2.0.36
+geoalchemy2==0.16.0
+psycopg2-binary==2.9.10
+alembic==1.14.0
+
+# Utilidades
+orjson==3.10.13
+httpx==0.28.1
+
+# Pruebas / calidad
+pytest==8.3.4
+pytest-asyncio==0.25.2

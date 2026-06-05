@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------------------
+# Dependencias mínimas para ejecutar la API, los algoritmos y los tests
+# SIN la pila geoespacial pesada (OSMnx/GeoPandas/GDAL).
+#
+# Útil para desarrollo rápido y CI: el sistema funciona con un grafo
+# representativo de Bogotá precargado (data/bogota_graph.json) en lugar de
+# descargar la red real desde OpenStreetMap.
+#
+# Para trabajar con la red vial REAL de Bogotá, instala además requirements.txt
+# (que incluye osmnx, geopandas, shapely, etc.).
+# ---------------------------------------------------------------------------
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+networkx==3.4.2
+numpy==2.2.1
+pandas==2.2.3
+orjson==3.10.13
+httpx==0.28.1
+# ORM (con respaldo a SQLite si no hay PostgreSQL disponible)
+sqlalchemy==2.0.36
+pytest==8.3.4
+pytest-asyncio==0.25.2

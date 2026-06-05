@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Entorno
+.env
+
+# Datos generados / cacheados
+backend/data/*.graphml
+backend/data/*.db
+# Se conserva el grafo representativo de ejemplo:
+!backend/data/bogota_graph.json
+
+# SO / editor
+.DS_Store
+.idea/
+.vscode/

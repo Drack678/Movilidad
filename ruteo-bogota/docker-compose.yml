@@ -1,0 +1,67 @@
+# ---------------------------------------------------------------------------
+# Orquestación de servicios para "RutaBogá"
+#
+# Levanta el stack completo:
+#   - db:       PostgreSQL 16 + PostGIS (almacena las ubicaciones guardadas).
+#   - backend:  API FastAPI con la pila geoespacial (OSMnx/NetworkX).
+#   - frontend: React + Express (proxy /api/* → backend).
+#
+# Uso:
+#   docker compose up --build
+#   Frontend en http://localhost:5000
+#   API (docs) en http://localhost:8000/docs
+# ---------------------------------------------------------------------------
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: ruteo
+      POSTGRES_PASSWORD: ruteo
+      POSTGRES_DB: ruteo_bogota
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Inicializa el esquema y datos de ejemplo al crear la base por primera vez.
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ruteo -d ruteo_bogota"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://ruteo:ruteo@db:5432/ruteo_bogota
+      # 1 = descargar la red real de Bogotá (lento la primera vez);
+      # 0 = arrancar con el grafo representativo.
+      USE_REAL_GRAPH: "1"
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persistir el grafo cacheado entre reinicios.
+      - graphcache:/app/data
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health').status==200 else 1)\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      # El proxy de Express reenvía /api/* a este destino.
+      FASTAPI_URL: http://backend:8000
+    ports:
+      - "5000:5000"
+
+volumes:
+  pgdata:
+  graphcache:
