@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>RutaBogá — Optimización de Rutas Urbanas con ACO</title>
+    <meta
+      name="description"
+      content="Optimización de rutas urbanas en Bogotá con Colonia de Hormigas (ACO), Dijkstra y A* sobre la red vial real. Simulación de tráfico, mapa de calor y analítica."
+    />
+    <meta property="og:title" content="RutaBogá — Optimización de Rutas Urbanas" />
+    <meta
+      property="og:description"
+      content="Compara algoritmos de ruteo (ACO, Dijkstra, A*) sobre el mapa de Bogotá con simulación de tráfico en tiempo real."
+    />
+    <!-- Fontshare: Satoshi (cuerpo) + Cabinet Grotesk (display) -->
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&f[]=cabinet-grotesk@500,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google: JetBrains Mono (datos / métricas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
